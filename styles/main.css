@@ -1397,7 +1397,7 @@ input, textarea {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #9d9d60;
+  background: var(--clr-primary);
   color: #fff;
   font-weight: 800;
   font-size: var(--text-sm);
@@ -1415,17 +1415,16 @@ input, textarea {
   font-size: var(--text-sm);
   font-weight: 700;
   margin-bottom: 2px;
-  color: #2B2927;
 }
 .how-to-step-text span {
   font-size: var(--text-sm);
-  color: #544F4B;
+  color: var(--clr-text-2);
   line-height: 1.5;
 }
 
 .how-to-tip {
   font-size: var(--text-sm);
-  color: #544F4B;
+  color: var(--clr-text-2);
   line-height: 1.5;
 }
 
@@ -2260,4 +2259,26 @@ img.lazy.loaded { opacity: 1; }
 .number-input:focus,
 .chat-input:focus {
   box-shadow: 0 0 0 3px rgba(251,89,89,0.2);
+}
+
+/* ── How-to modal overlay fix ─────────────────────── */
+#howToModal {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 9999 !important;
+  background: rgba(0,0,0,0.8) !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+}
+
+#howToModal > div {
+  background: var(--clr-surface) !important;
+  position: relative !important;
+  z-index: 10000 !important;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0 !important;
+  width: 100% !important;
+  max-width: 480px !important;
+  max-height: 90vh !important;
+  overflow-y: auto !important;
 }
