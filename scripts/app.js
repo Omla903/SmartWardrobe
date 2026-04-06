@@ -882,6 +882,18 @@ function _renderProfile() {
         <div class="profile-avatar">${(profile.name || "?")[0].toUpperCase()}</div>
         <div class="profile-name">${profile.name || "You"}</div>
         <div class="profile-style-tag">✦ ${_styleLabel(profile.baseStyle)}</div>
+        <div style="margin-top:var(--sp-3)">
+          <button id="profileHowtoBtn" style="
+            padding:var(--sp-2) var(--sp-4);
+            border:1.5px solid var(--clr-border);
+            border-radius:var(--radius-full);
+            font-size:var(--text-sm);
+            font-weight:600;
+            color:var(--clr-text-2);
+            background:none;
+            cursor:pointer;
+          ">How to use</button>
+        </div>
       </div>
 
       <!-- Wardrobe stats -->
@@ -985,6 +997,10 @@ function _renderProfile() {
 }
 
 function _wireProfile() {
+  // How to use button
+  const howtoBtn = document.getElementById("profileHowtoBtn");
+  if (howtoBtn) howtoBtn.addEventListener("click", _showHowToModal);
+
   // Save Groq API key to localStorage
   const saveBtn = document.getElementById("saveGroqKeyBtn");
   if (saveBtn) {
@@ -1029,72 +1045,64 @@ function _sustainDesc(score, total) {
   return `Only ${score}% of your ${total} items worn in the last 30 days. Consider rewearing more before buying new.`;
 }
 
+
 // ── How-to-use modal ───────────────────────────────
 function _showHowToModal() {
   if (document.getElementById("howToModal")) return;
   const modal = document.createElement("div");
   modal.id = "howToModal";
   modal.style.cssText = `
-    position:fixed;inset:0;z-index:999;
+    position:fixed;inset:0;z-index:9999;
     background:rgba(0,0,0,0.75);
     display:flex;align-items:flex-end;justify-content:center;
   `;
   modal.innerHTML = `
     <div style="
-      background:#F2EFEC;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
-      width:100%;max-width:480px;padding:var(--sp-6) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom));
+      background:var(--clr-surface);
+      border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+      width:100%;max-width:480px;
+      padding:var(--sp-6) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom));
       max-height:90vh;overflow-y:auto;
-      position:relative;z-index:1000;
     ">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-5)">
-        <span style="font-size:var(--text-lg);font-weight:800;color:#2B2927">How to use Garde</span>
-        <button id="howToCloseBtn" style="background:none;border:none;color:#7E7B78;font-size:20px;cursor:pointer;padding:var(--sp-1)">✕</button>
+        <span style="font-size:var(--text-lg);font-weight:800;color:var(--clr-text)">How to use Garde</span>
+        <button id="howToCloseBtn" style="background:none;border:none;color:var(--clr-text-2);font-size:20px;cursor:pointer">✕</button>
       </div>
 
-<<<<<<< HEAD
-      <div style="background:#ffffff;border-radius:12px;padding:16px;margin-bottom:16px">
+      <div style="background:var(--clr-surface-2);border:1px solid var(--clr-border);border-radius:12px;padding:16px;margin-bottom:12px">
         <div style="display:flex;flex-direction:column;gap:16px">
           <div style="display:flex;gap:12px;align-items:flex-start">
-            <div style="background:#9d9d60;color:#fff;border-radius:50%;width:26px;height:26px;min-width:26px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">1</div>
-            <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:4px">Add your clothes</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Tap the + button, take a photo or upload one. The AI will detect the item and fill in the details automatically.</div></div>
+            <div style="background:var(--clr-primary);color:#fff;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">1</div>
+            <div>
+              <div style="font-weight:700;font-size:14px;color:var(--clr-text);margin-bottom:4px">Add your clothes</div>
+              <div style="font-size:13px;color:var(--clr-text-2);line-height:1.5">Tap the + button, take a photo or upload one. The AI will detect the item and fill in the details automatically.</div>
+            </div>
           </div>
           <div style="display:flex;gap:12px;align-items:flex-start">
-            <div style="background:#9d9d60;color:#fff;border-radius:50%;width:26px;height:26px;min-width:26px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">2</div>
-            <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:4px">Get outfit ideas</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Go to Looks, pick an item you want to wear, and the app will build a complete look based on your wardrobe and the weather.</div></div>
+            <div style="background:var(--clr-primary);color:#fff;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">2</div>
+            <div>
+              <div style="font-weight:700;font-size:14px;color:var(--clr-text);margin-bottom:4px">Get outfit ideas</div>
+              <div style="font-size:13px;color:var(--clr-text-2);line-height:1.5">Go to Looks, pick an item you want to wear, and the app will build a complete look based on your wardrobe and the weather.</div>
+            </div>
           </div>
           <div style="display:flex;gap:12px;align-items:flex-start">
-            <div style="background:#9d9d60;color:#fff;border-radius:50%;width:26px;height:26px;min-width:26px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">3</div>
-            <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:4px">Ask for advice</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Use the AI chat to get outfit suggestions, check if a purchase makes sense, or plan what to pack for a trip.</div></div>
+            <div style="background:var(--clr-primary);color:#fff;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">3</div>
+            <div>
+              <div style="font-weight:700;font-size:14px;color:var(--clr-text);margin-bottom:4px">Ask for advice</div>
+              <div style="font-size:13px;color:var(--clr-text-2);line-height:1.5">Use the AI chat to get outfit suggestions, check if a purchase makes sense, or plan what to pack for a trip.</div>
+            </div>
           </div>
         </div>
       </div>
-=======
-<div style="background:#ffffff;border-radius:12px;padding:16px;margin-bottom:16px">
-  <div style="display:flex;flex-direction:column;gap:14px">
-    <div style="display:flex;gap:12px;align-items:flex-start">
-      <div style="background:#9d9d60;color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">1</div>
-      <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:3px">Add your clothes</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Tap the + button, take a photo or upload one. The AI will detect the item and fill in the details automatically.</div></div>
-    </div>
-    <div style="display:flex;gap:12px;align-items:flex-start">
-      <div style="background:#9d9d60;color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">2</div>
-      <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:3px">Get outfit ideas</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Go to Looks, pick an item you want to wear, and the app will build a complete look based on your wardrobe and the weather.</div></div>
-    </div>
-    <div style="display:flex;gap:12px;align-items:flex-start">
-      <div style="background:#9d9d60;color:#fff;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;flex-shrink:0">3</div>
-      <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:3px">Ask for advice</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Use the AI chat to get outfit suggestions, check if a purchase makes sense, or plan what to pack for a trip.</div></div>
-    </div>
-  </div>
-</div>
->>>>>>> a8767e60b1b11d670a207f3964e6815769e6aecb
 
-      <div style="background:#ffffff;border-radius:12px;padding:16px;margin-bottom:4px">
-        <div style="font-size:14px;font-weight:700;color:#2B2927;margin-bottom:6px">📸 Photo tips</div>
-        <div style="font-size:13px;color:#544F4B;line-height:1.5">For best results, place items flat on a plain surface or hang them against a plain wall. Good lighting makes the AI more accurate.</div>
+      <div style="background:var(--clr-surface-2);border:1px solid var(--clr-border);border-radius:12px;padding:16px;margin-bottom:4px">
+        <div style="font-size:14px;font-weight:700;color:var(--clr-text);margin-bottom:6px">📸 Photo tips</div>
+        <div style="font-size:13px;color:var(--clr-text-2);line-height:1.5">For best results, place items flat on a plain surface or hang them against a plain wall. Good lighting makes the AI more accurate.</div>
       </div>
 
       <button id="howToGotItBtn" style="
         width:100%;margin-top:20px;padding:14px;
-        background:#9d9d60;color:#fff;border:none;
+        background:var(--clr-primary);color:#fff;border:none;
         border-radius:999px;font-size:16px;font-weight:700;cursor:pointer;
       ">Got it</button>
     </div>
