@@ -1053,7 +1053,7 @@ function _showHowToModal() {
   modal.id = "howToModal";
   modal.style.cssText = `
     position:fixed;inset:0;z-index:999;
-    background:rgba(0,0,0,0.6);
+    background:rgba(0,0,0,0.75);
     display:flex;align-items:flex-end;justify-content:center;
   `;
   modal.innerHTML = `
@@ -1061,6 +1061,7 @@ function _showHowToModal() {
       background:#F2EFEC;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
       width:100%;max-width:480px;padding:var(--sp-6) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom));
       max-height:90vh;overflow-y:auto;
+      position:relative;z-index:1000;
     ">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-5)">
         <span style="font-size:var(--text-lg);font-weight:800;color:var(--clr-text)">How to use Garde</span>

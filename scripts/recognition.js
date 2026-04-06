@@ -81,7 +81,6 @@ Rules:
 
       if (!Array.isArray(data)) return null;
 
-      // Validate and sanitize each item
       return data
         .map(item => ({
           category: _validate(item.category, ["tops","bottoms","shoes","outerwear","accessories","dresses"], "tops"),
@@ -91,7 +90,7 @@ Rules:
           style:    Array.isArray(item.style)  ? item.style  : ["casual"],
           name:     item.name || "",
         }))
-        .filter(item => item.category); // remove malformed entries
+        .filter(item => item.category);
 
     } catch {
       return null;
@@ -113,19 +112,7 @@ Rules:
     };
   }
 
-  /**
-   * Generate a product icon URL for a clothing item using Pollinations.ai.
-   * Returns a URL immediately — the browser fetches/generates the image lazily.
-   * No API key required.
-   * @param {Object} item — wardrobe item with category, color, name, style, warmth
-   * @returns {string} image URL
-   */
-  /**
-   * Generate a product icon URL for a clothing item.
-   * Uses Unsplash Source — real photos, instant, no API key.
-   * The seed is deterministic so the same item always gets the same photo.
-   */
-  // Icon generation is now handled by SVG in wardrobe.js — no external API needed
+  // Icon generation handled by SVG in wardrobe.js
   function generateIcon(item) { return null; }
 
   return { analyzeMultiple, generateIcon };
