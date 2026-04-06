@@ -1058,7 +1058,7 @@ function _showHowToModal() {
   `;
   modal.innerHTML = `
     <div style="
-      background:#ffffff;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+      background:#F2EFEC;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
       width:100%;max-width:480px;padding:var(--sp-6) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom));
       max-height:90vh;overflow-y:auto;
       position:relative;z-index:1000;
@@ -1070,7 +1070,7 @@ function _showHowToModal() {
 
       <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:16px">
 
-        <div style="background:#F2EFEC;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start">
+        <div style="background:#ffffff;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start">
           <div style="background:#9d9d60;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">1</div>
           <div>
             <div style="font-weight:700;font-size:15px;color:#2B2927;margin-bottom:4px">Add your clothes</div>
@@ -1078,7 +1078,7 @@ function _showHowToModal() {
           </div>
         </div>
 
-        <div style="background:#F2EFEC;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start">
+        <div style="background:#ffffff;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start">
           <div style="background:#9d9d60;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">2</div>
           <div>
             <div style="font-weight:700;font-size:15px;color:#2B2927;margin-bottom:4px">Get outfit ideas</div>
@@ -1086,7 +1086,7 @@ function _showHowToModal() {
           </div>
         </div>
 
-        <div style="background:#F2EFEC;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start">
+        <div style="background:#ffffff;border-radius:12px;padding:16px;display:flex;gap:14px;align-items:flex-start">
           <div style="background:#9d9d60;color:#fff;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0">3</div>
           <div>
             <div style="font-weight:700;font-size:15px;color:#2B2927;margin-bottom:4px">Ask for advice</div>
@@ -1096,7 +1096,7 @@ function _showHowToModal() {
 
       </div>
 
-      <div style="background:#F2EFEC;border-radius:12px;padding:16px;margin-bottom:4px">
+      <div style="background:#ffffff;border-radius:12px;padding:16px;margin-bottom:4px">
         <div style="font-size:14px;font-weight:700;color:#2B2927;margin-bottom:6px">📸 Photo tips</div>
         <div style="font-size:13px;color:#544F4B;line-height:1.5">For best results, place items flat on a plain surface or hang them against a plain wall. Good lighting makes the AI more accurate.</div>
       </div>
