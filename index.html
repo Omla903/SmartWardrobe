@@ -64,7 +64,6 @@
       </div>
       <div class="header-right">
         <div class="weather-badge" id="weatherBadge">
-          <span id="weatherIcon">—</span>
           <span id="weatherTemp">--°C</span>
         </div>
         <button class="avatar-btn" id="avatarBtn">G</button>
@@ -111,7 +110,7 @@
       <!-- Photo Upload -->
       <div class="upload-zone" id="uploadZone">
         <div class="upload-content" id="uploadContent">
-          <span class="upload-icon">📸</span>
+          <i data-lucide="camera" style="width:32px;height:32px;color:var(--clr-text-3)"></i>
           <p>Tap to upload photo</p>
           <span class="upload-sub">or choose from gallery</span>
         </div>
@@ -128,20 +127,20 @@
 
         <!-- Category -->
         <div class="form-group">
-          <label>Category <span class="ai-badge">✦ AI</span></label>
+          <label>Category <span class="ai-badge">AI</span></label>
           <div class="select-grid" id="categorySelect">
-            <button class="sel-btn active" data-val="tops">👕 Tops</button>
-            <button class="sel-btn" data-val="bottoms">👖 Bottoms</button>
-            <button class="sel-btn" data-val="shoes">👟 Shoes</button>
-            <button class="sel-btn" data-val="outerwear">🧥 Outerwear</button>
-            <button class="sel-btn" data-val="accessories">💍 Accessories</button>
-            <button class="sel-btn" data-val="dresses">👗 Dresses</button>
+            <button class="sel-btn active" data-val="tops">Tops</button>
+            <button class="sel-btn" data-val="bottoms">Bottoms</button>
+            <button class="sel-btn" data-val="shoes">Shoes</button>
+            <button class="sel-btn" data-val="outerwear">Outerwear</button>
+            <button class="sel-btn" data-val="accessories">Accessories</button>
+            <button class="sel-btn" data-val="dresses">Dresses</button>
           </div>
         </div>
 
         <!-- Color -->
         <div class="form-group">
-          <label>Primary Color <span class="ai-badge">✦ AI</span></label>
+          <label>Primary Color <span class="ai-badge">AI</span></label>
           <div class="color-grid" id="colorSelect">
             <button class="color-btn active" data-val="black"  style="background:#111"></button>
             <button class="color-btn" data-val="white"  style="background:#fff;border:2px solid #ddd"></button>
@@ -158,35 +157,29 @@
 
         <!-- Season -->
         <div class="form-group">
-          <label>Season <span class="ai-badge">✦ AI</span></label>
+          <label>Season <span class="ai-badge">AI</span></label>
           <div class="select-grid" id="seasonSelect">
-            <button class="sel-btn" data-val="spring">🌸 Spring</button>
-            <button class="sel-btn" data-val="summer">☀️ Summer</button>
-            <button class="sel-btn active" data-val="autumn">🍂 Autumn</button>
-            <button class="sel-btn" data-val="winter">❄️ Winter</button>
-            <button class="sel-btn active" data-val="all" style="grid-column:span 2">🌍 All seasons</button>
+            <button class="sel-btn" data-val="spring">Spring</button>
+            <button class="sel-btn" data-val="summer">Summer</button>
+            <button class="sel-btn active" data-val="autumn">Autumn</button>
+            <button class="sel-btn" data-val="winter">Winter</button>
+            <button class="sel-btn active" data-val="all" style="grid-column:span 2">All seasons</button>
           </div>
         </div>
 
         <!-- Warmth -->
         <div class="form-group">
-          <label>Warmth Level <span class="ai-badge">✦ AI</span></label>
+          <label>Warmth Level <span class="ai-badge">AI</span></label>
           <div class="warmth-options" id="warmthSelect">
-            <button class="warmth-btn active" data-val="1">
-              <span class="warmth-icon">🌬️</span> Light
-            </button>
-            <button class="warmth-btn" data-val="2">
-              <span class="warmth-icon">🧣</span> Medium
-            </button>
-            <button class="warmth-btn" data-val="3">
-              <span class="warmth-icon">🔥</span> Warm
-            </button>
+            <button class="warmth-btn active" data-val="1">Light</button>
+            <button class="warmth-btn" data-val="2">Medium</button>
+            <button class="warmth-btn" data-val="3">Warm</button>
           </div>
         </div>
 
         <!-- Style Tags -->
         <div class="form-group">
-          <label>Style Tags <span class="ai-badge">✦ AI</span></label>
+          <label>Style Tags <span class="ai-badge">AI</span></label>
           <div class="tag-grid" id="tagSelect">
             <button class="tag-btn" data-val="casual">Casual</button>
             <button class="tag-btn" data-val="formal">Formal</button>

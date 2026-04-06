@@ -76,12 +76,12 @@ const Weather = (() => {
   }
 
   function _buildSummary(temp, isRain, isSnow) {
-    if (isSnow)       return "Snowy — bundle up";
-    if (isRain)       return "Rainy — waterproof layers";
-    if (temp < 8)     return "Very cold — dress warmly";
-    if (temp < 15)    return "Cool — bring a jacket";
-    if (temp < 22)    return "Mild — light layers work";
-    return "Warm — dress light";
+    if (isSnow)       return "Snowy, bundle up";
+    if (isRain)       return "Rainy, waterproof layers";
+    if (temp < 8)     return "Very cold, dress warmly";
+    if (temp < 15)    return "Cool, bring a jacket";
+    if (temp < 22)    return "Mild, light layers work";
+    return "Warm, dress light";
   }
 
   // Fetch from Open-Meteo (free, no API key)

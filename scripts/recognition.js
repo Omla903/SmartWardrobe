@@ -12,11 +12,6 @@ const Recognition = (() => {
    * @returns {Array} [{category, color, season, warmth, style, name}, ...]
    */
   async function analyzeMultiple(base64Image) {
-    if (!CONFIG.GROQ_API_KEY || CONFIG.GROQ_API_KEY === "YOUR_GROQ_API_KEY_HERE") {
-      console.warn("Groq API key not set — returning mock recognition");
-      return [_mockItem()];
-    }
-
     const prompt = `You are a fashion expert analyzing a clothing photo.
 
 Identify EVERY distinct clothing item visible in the photo (e.g. shirt, jeans, jacket, shoes, bag, etc.).
@@ -41,12 +36,9 @@ Rules:
 - If unsure about an item, make your best guess — do not skip it`;
 
     try {
-      const response = await window.fetch(CONFIG.GROQ_API_URL, {
+      const response = await window.fetch("/api/vision", {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${CONFIG.GROQ_API_KEY}`,
-          "Content-Type":  "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           model: CONFIG.GROQ_VISION_MODEL,
           messages: [

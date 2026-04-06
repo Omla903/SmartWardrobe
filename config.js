@@ -1,21 +1,11 @@
 // ─────────────────────────────────────────────
-//  Smart Wardrobe — API Configuration
-//  API key is stored in localStorage (never committed to git)
+//  Garde — Client-side config
+//  API keys live in Vercel environment variables (server-side only).
+//  Nothing secret here.
 // ─────────────────────────────────────────────
 
 const CONFIG = {
-  // Reads key from localStorage — set it once in the Profile screen
-  get GROQ_API_KEY() {
-    return localStorage.getItem("groq_api_key") || "";
-  },
-
-  // Models
+  // Groq model names — used by /api/chat and /api/vision proxies
   GROQ_VISION_MODEL: "meta-llama/llama-4-scout-17b-16e-instruct",
   GROQ_CHAT_MODEL:   "llama-3.3-70b-versatile",
-
-  // Endpoints
-  GROQ_API_URL: "https://api.groq.com/openai/v1/chat/completions",
-
-  // IP Geolocation fallback
-  IPAPI_KEY: "",
 };

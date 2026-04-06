@@ -28,16 +28,19 @@ A front-end browser prototype for a Smart Wardrobe concept. Built for a MIBA Pro
 - **Vanilla CSS** — full design system in `styles/main.css`
 - **Vanilla JavaScript (ES6+)** — modular scripts, no frameworks
 - **Lucide Icons** — via CDN
-- **Google Fonts** — Inter
+- **Google Fonts** — Red Hat Display
 - **Open-Meteo API** — free weather API, no key required
-- **localStorage** — wardrobe data persistence (no backend)
+- **Groq API** — vision (clothing recognition) + chat (AI assistant); key stored in localStorage, set via Profile screen
+- **Photoroom API** — background removal; key stored server-side as Vercel env var, proxied via `/api/remove-bg`
+- **localStorage** — wardrobe data + profile persistence (no backend)
+- **Vercel** — hosting + serverless functions (replaces GitHub Pages)
 
 ## Folder Structure
 ```
 SmartWardrobe/
 ├── CLAUDE.md               ← you are here
 ├── TODO.md                 ← master task list (keep updated)
-├── config.js               ← API keys — blank key committed, add real key locally only
+├── config.js               ← client-side config (Groq key read from localStorage; no secrets committed)
 ├── index.html              ← app shell + all screen templates
 ├── styles/
 │   └── main.css            ← design system + all component styles
@@ -48,18 +51,29 @@ SmartWardrobe/
 │   ├── weather.js          ← weather fetching + context rules
 │   ├── assistant.js        ← AI chat logic (wardrobe-aware responses)
 │   └── recognition.js      ← clothing photo recognition via Groq Vision
+├── api/
+│   └── remove-bg.js        ← Vercel serverless function — proxies Photoroom API (key never in client)
 └── Smart Wardrobe.docx     ← original project document (keep, do not delete)
 ```
 
 ## Architecture Decisions
-- **No backend, no build step** — open `index.html` directly in browser
+- **Vercel hosting** — replaces GitHub Pages; enables serverless functions for API key security
+- **Photoroom key is server-side only** — stored as `PHOTOROOM_API_KEY` Vercel env var, never in client JS
+- **Groq key is user-supplied** — stored in their own localStorage via Profile screen (each user brings their own key)
 - **localStorage** for wardrobe data — survives page refresh, good enough for demo
 - **Rule-based outfit engine** — simulates AI logic without actual ML
 - **Pre-loaded demo data** — wardrobe starts populated so it never looks empty on presentation day
 - **Modular JS files** — each file owns one concern, easy for teammates to work on independently
 
-## GitHub
+## API Keys (never commit)
+| Key | Where stored | Set by |
+|-----|-------------|--------|
+| `PHOTOROOM_API_KEY` | Vercel environment variable | Omar (in Vercel dashboard) |
+| Groq API key | User's localStorage (`groq_api_key`) | Each user via Profile screen |
+
+## GitHub / Vercel
 - Repo: https://github.com/Omla903/SmartWardrobe.git
+- Vercel project connected to repo — deploys automatically on push to `main`
 - Branch strategy: work on `main` for now, teammates can branch if needed
 
 ## Team
@@ -68,21 +82,29 @@ SmartWardrobe/
 - Other teammates may contribute later
 
 ## Current Status
-- [x] Folder cleaned up
-- [x] Git initialized and connected to GitHub
-- [x] CLAUDE.md created
-- [x] index.html
-- [x] styles/main.css
-- [x] scripts/wardrobe.js
-- [x] scripts/weather.js
-- [x] scripts/outfits.js
-- [x] scripts/assistant.js
-- [x] scripts/app.js
-- [x] scripts/recognition.js
-- [x] Pre-load demo data
-- [x] Push to GitHub
-- [x] Deployed on GitHub Pages → https://omla903.github.io/SmartWardrobe/
-- [x] Dynamic user name — collected in onboarding, shown in dashboard greeting + profile screen
+- [x] Full dark-mode UI — "Garde" rebrand, Red Hat Display, coral-red `#FB5959` accent
+- [x] Flatlay outfit builder (Looks tab)
+- [x] AI chat assistant (wardrobe-aware, Groq-powered)
+- [x] Clothing recognition via Groq Vision
+- [x] Dynamic user name from onboarding → shown in greeting + profile
+- [x] Groq API key panel in Profile screen
+- [ ] **Migrate to Vercel** (in progress — unblocks Photoroom)
+- [ ] **Photoroom background removal** — serverless proxy at `/api/remove-bg`
+- [ ] **Profile inline editing** — pencil icon, fields editable in place
+- [ ] **How-to-use screen** — shown once after onboarding; re-accessible from Profile
+
+## Screen Inventory
+| Screen | Status | Notes |
+|---|---|---|
+| Splash | ✅ Done | Garde wordmark |
+| Onboarding quiz | ✅ Done | Saves name + style prefs |
+| Dashboard | ✅ Done | Live weather, outfit suggestion, stats |
+| Wardrobe grid | ✅ Done | Filter by category/color |
+| Add item modal | ✅ Done | Groq vision; bg removal coming |
+| Flatlay builder (Looks) | ✅ Done | Save looks, occasion pills |
+| AI Chat (Ask AI) | ✅ Done | Wardrobe-aware + shopping advice |
+| Profile | 🔧 Partial | Read-only; editing coming |
+| How-to-use | ❌ Missing | Two paths: item photos / outfit photos |
 
 ## What "Good" Looks Like
 - Feels like a real mobile app (not a webpage)

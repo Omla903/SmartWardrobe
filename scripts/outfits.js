@@ -48,7 +48,7 @@ const OutfitEngine = (() => {
   }
 
   // Score a candidate item vs the anchor and outfit so far
-  function _score(candidate, anchor, outfitColors, occasion) {
+  function _score(candidate, anchor, outfitColors, occasion, preferredColors) {
     let score = 0;
 
     // Color compatibility with anchor
@@ -66,16 +66,19 @@ const OutfitEngine = (() => {
     // Slight preference for more-worn items (they've been validated by the user)
     if ((candidate.timesWorn || 0) > 5) score += 1;
 
+    // User's color preference from onboarding
+    if (preferredColors.length && preferredColors.includes(candidate.color)) score += 2;
+
     return score;
   }
 
   // Pick the best item for a given role from a candidate pool
-  function _pick(pool, anchor, outfitColors, occasion, weatherCtx) {
+  function _pick(pool, anchor, outfitColors, occasion, weatherCtx, preferredColors) {
     const valid = pool.filter(i => _fitsWeather(i, weatherCtx));
     if (!valid.length) return null;
 
     const scored = valid
-      .map(i => ({ item: i, score: _score(i, anchor, outfitColors, occasion) }))
+      .map(i => ({ item: i, score: _score(i, anchor, outfitColors, occasion, preferredColors) }))
       .sort((a, b) => b.score - a.score);
 
     // Pick from top 3 randomly for variety across sessions
@@ -90,7 +93,7 @@ const OutfitEngine = (() => {
    * @param {string}      occasion   — "casual" | "formal" | "business" | "sport" | "evening" | "weekend"
    * @returns {Object} outfit: { top, bottom, shoes, outerwear (optional), anchor }
    */
-  function generate(anchor, weatherCtx, occasion = "casual") {
+  function generate(anchor, weatherCtx, occasion = "casual", preferredColors = []) {
     const all = wardrobe.getAll();
     if (all.length < 3) return null; // not enough items
 
@@ -120,7 +123,7 @@ const OutfitEngine = (() => {
       const pool = all.filter(i =>
         i.category === role && !used.has(i.id)
       );
-      const chosen = _pick(pool, anchor || { color: "black", style: [occasion] }, colors, occasion, weatherCtx);
+      const chosen = _pick(pool, anchor || { color: "black", style: [occasion] }, colors, occasion, weatherCtx, preferredColors);
 
       if (chosen) {
         outfit[role]  = chosen;

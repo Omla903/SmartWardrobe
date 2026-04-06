@@ -1343,6 +1343,91 @@ input, textarea {
   margin-top: var(--sp-2);
 }
 
+.profile-action-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+
+.profile-edit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  background: var(--clr-surface-2);
+  border: 1px solid var(--clr-border);
+  color: var(--clr-text-2);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: var(--sp-2) var(--sp-4);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+.profile-edit-btn:hover { color: var(--clr-text-1); border-color: var(--clr-text-3); }
+
+.profile-howto-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  background: transparent;
+  border: none;
+  color: var(--clr-primary);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  padding: var(--sp-2) var(--sp-3);
+  cursor: pointer;
+}
+
+/* ── How-to modal ───────────────────────────────── */
+.how-to-steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  margin: var(--sp-4) 0;
+}
+
+.how-to-step {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-4);
+}
+
+.how-to-num {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--clr-primary);
+  color: #fff;
+  font-weight: 800;
+  font-size: var(--text-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.how-to-step-text {
+  padding-top: var(--sp-1);
+}
+.how-to-step-text strong {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+.how-to-step-text span {
+  font-size: var(--text-sm);
+  color: var(--clr-text-2);
+  line-height: 1.5;
+}
+
+.how-to-tip {
+  font-size: var(--text-sm);
+  color: var(--clr-text-2);
+  line-height: 1.5;
+}
+
 .style-breakdown {
   display: flex;
   flex-direction: column;

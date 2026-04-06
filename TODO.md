@@ -1,116 +1,100 @@
 # Smart Wardrobe — Master Task List
 
 > Last updated: April 2026
-> Deployment: https://omla903.github.io/SmartWardrobe/
+> GitHub: https://github.com/Omla903/SmartWardrobe
+> Deployment: Vercel (migrating from GitHub Pages)
 
 ---
 
-## PRIORITY 1 — Must ship before demo
+## SPRINT — Current focus (do in order)
 
-### Demo Scenarios (all 3 must work end-to-end, no friction)
+### 1. Hosting migration → Vercel
+- [ ] Create `vercel.json` config
+- [ ] Create `api/remove-bg.js` serverless function (Photoroom proxy — keeps key server-side)
+- [ ] Deploy to Vercel via CLI or dashboard
+- [ ] Add `PHOTOROOM_API_KEY` as Vercel environment variable
+- [ ] Verify live URL works end-to-end
+- [ ] Update all references from GitHub Pages URL to Vercel URL
 
-- [ ] **Scenario 1 — Digitizing Clothes**
-  - Upload a photo → Groq Vision detects type, color, season, warmth
-  - User confirms attributes → item saved to wardrobe
-  - QA: does it work with different clothing types? Does it fail gracefully if Vision API is slow?
+### 2. Background removal (Photoroom)
+- [ ] Wire `recognition.js` to call `/api/remove-bg` before Groq vision analysis
+- [ ] Show before/after toggle in Add Item modal after upload
+- [ ] Store cleaned image (transparent/white bg) as the wardrobe item thumbnail
+- [ ] Graceful fallback if Photoroom fails — use raw photo, show soft warning
 
-- [ ] **Scenario 2 — Outfit Recommendation**
-  - User picks one anchor item ("I want to wear my navy sweater")
-  - System builds a full outfit around it, adapted to live weather
-  - QA: does changing occasion (casual / formal / sport) produce different outfits?
-  - QA: does cold weather trigger outerwear? Does warm weather suppress heavy items?
+### 3. Profile inline editing
+- [ ] Add pencil ✏️ icon to profile header
+- [ ] Tap → name + style pref fields become editable in place (no new screen)
+- [ ] Save updates `sw_profile_v1` in localStorage
+- [ ] Verify onboarding data flows through correctly for fresh users (name, baseStyle, colorPref, sustainPref)
 
-- [ ] **Scenario 3 — Shopping Advice**
-  - User asks "Should I buy black jeans?" in chat
-  - AI checks wardrobe for duplicates (hard logic, not just LLM guessing)
-  - AI gives structured advice: duplicate warning + how many existing outfits it fits into
-  - QA: test with items the user has vs. items they don't
-
-### AI Assistant Improvements
-
-- [x] **Structured "Should I buy?" response**
-  - Hard duplicate-check logic in `assistant.js` before sending to Groq
-  - Duplicate count + compatible outfit count injected into system prompt as facts
-  - Response always follows: duplicate warning → compatibility → verdict
-
-- [x] **Friendly API error fallback**
-  - Catches API errors and shows "I'm having a moment — here's my best advice anyway:" + mock reply
-
-- [ ] **Weather QA**
-  - Confirm live weather pulls correctly in header badge
-  - Test IP fallback when location is denied — should show a city name, not crash
-
-### Deployment
-
-- [x] App live on GitHub Pages → https://omla903.github.io/SmartWardrobe/
-- [ ] Verify all features work on the live URL (not just localhost)
-- [ ] Test on the presentation device (not just your laptop)
+### 4. How-to-use screen
+- [ ] Show automatically once after onboarding completes (flag `sw_howto_seen` in localStorage)
+- [ ] Two paths visually:
+  - **Path 1 — Add individual items**: "Take a photo of one item on a flat surface → AI removes background → detects type, color, season → saved to your wardrobe"
+  - **Path 2 — Save outfits**: "Take a photo of a full outfit (worn or flatlay) → saved as a Look → AI identifies your best combinations"
+- [ ] "Got it" dismisses and sets flag
+- [ ] Accessible again from Profile screen → "How to use Garde" button
 
 ---
 
-## PRIORITY 2 — Ship if time allows
+## PRIORITY 1 — Demo scenarios (must all work)
 
-- [x] **Duplicate detection on upload**
-  - When saving a new item, scans wardrobe for same category + color
-  - Shows amber warning banner + changes button to "Save Anyway" on first click; second click saves
+### Scenario 1 — Digitizing Clothes
+- [ ] Upload photo → Groq Vision detects type, color, season, warmth
+- [ ] Background removed cleanly by Photoroom before display
+- [ ] User confirms attributes → item saved
+- [ ] Fails gracefully if API is slow (loading state, timeout)
 
-- [ ] **Outfit compatibility count for "Should I buy?"**
-  - When advising on a purchase, calculate how many existing outfits the item slots into
-  - Surface this as a number: "This would work in ~4 outfits you can already build"
+### Scenario 2 — Outfit Recommendation
+- [ ] Pick one anchor item → full outfit built around it
+- [ ] Adapts to live weather (cold = outerwear, warm = light layers)
+- [ ] Occasion pills (casual / formal / sport / evening) change the output
 
-- [x] **Sensor simulation panel**
-  - Dashboard card showing simulated humidity + temperature with live-updating values and fabric care status
-
-- [ ] **Outfit planner — weekly view**
-  - 7 day slots on a screen, tap a slot → generate or pick an outfit → save it
-  - Show the week plan on the dashboard
-
-- [x] **Flatlay outfit builder + Saved Looks (Looks tab)**
-  - Renamed "Outfits" → "Looks"
-  - Flatlay builder: vertical stack of slots (outerwear, top, bottom, shoes), tap slot → swap from wardrobe row below
-  - Auto-generates outfit on load, refresh button, occasion pills
-  - Save built look → appears in saved looks grid
-  - Upload full outfit photo → saved as a look card
-
-- [ ] **Connect onboarding answers to outfit logic**
-  - If user selected "business" style → outfit generator defaults to business occasion
-  - If user selected "neutral colors" → prioritize black/white/grey/navy in picks
-  - Quiz answers are already saved in localStorage — just need to wire them up
+### Scenario 3 — Shopping Advice
+- [ ] "Should I buy black jeans?" in chat
+- [ ] Hard duplicate-check logic before LLM call
+- [ ] Response: duplicate count + compatible outfits count + verdict
 
 ---
 
-## PRIORITY 3 — Only if everything else is 100% done
+## PRIORITY 2 — Polish before sharing
 
-- [x] **Style profile — real data**
-  - ~~Pull user's name from onboarding (currently hardcoded as "Omar")~~ — done: name collected in onboarding step, shown in dashboard greeting and profile screen
-  - Sustainability score: show which items haven't been worn in 30+ days with a nudge
-
-- [ ] **Wardrobe display view**
-  - Full-screen TV/tablet mode showing today's outfit
-  - Triggered by "Show on display" button on dashboard
-
-- [ ] **Language option** (French / English toggle)
-
-- [ ] **Dataset of clothes / similar items** (for smarter recommendations)
-
-- [ ] **Sustainability ranking** (rank items by wear frequency, flag unused ones)
-
-- [ ] ~~**3D avatar**~~ — out of scope, do not attempt
+- [ ] **Onboarding → profile data verified** — confirm name/style from onboarding shows correctly in profile for a fresh user (localStorage cleared)
+- [ ] **Groq key UX** — if no key is set, show a soft banner in chat + recognition prompting user to set it in Profile
+- [ ] **Weather QA** — confirm live weather works on Vercel URL, test IP fallback
+- [ ] **Demo prep** — run all 3 scenarios back to back, target < 5 min
+- [ ] **Test on presentation device** (not just your laptop)
 
 ---
 
-## Demo Prep Checklist 🎯
+## PRIORITY 3 — Nice to have
 
-- [ ] Run through all 3 scenarios back to back — time it, target under 5 minutes
-- [ ] Clear localStorage before the demo — start fresh so onboarding shows
-- [ ] Pre-add 3–4 real clothing photos before the live demo (skip waiting for AI live)
-- [ ] Prepare a fallback — if Groq API is slow, have a screenshot/recording ready
-- [ ] Test on the presentation device
+- [ ] Outfit planner — weekly view (7 slots, save outfits per day)
+- [ ] Connect onboarding style pref → outfit generator default occasion
+- [ ] Sustainability nudges — flag items not worn in 30+ days
+- [ ] Wardrobe display mode (TV/tablet full-screen view)
+- [ ] Language toggle (French / English)
+
+---
+
+## Done ✅
+
+- [x] Garde rebrand — dark mode, Red Hat Display, coral-red `#FB5959`
+- [x] Flatlay outfit builder + Saved Looks tab
+- [x] AI Chat assistant (Groq-powered, wardrobe-aware)
+- [x] Clothing recognition via Groq Vision
+- [x] Groq API key panel in Profile screen
+- [x] Dynamic user name from onboarding
+- [x] Duplicate detection on upload (warn + confirm)
+- [x] Sensor simulation panel on dashboard
+- [x] Pre-loaded demo wardrobe data
+- [x] Deployed on GitHub Pages (migrating to Vercel)
 
 ---
 
 ## Known Issues 🐛
 
-- [ ] Groq API error shows raw error string in chat (fix is Priority 1)
-- [ ] Chat history resets on page refresh (by design — no backend, acceptable)
-- [ ] Multi-photo detection items share the same category icon (no bounding boxes available — acceptable)
+- [ ] Chat history resets on page refresh (by design — no backend, acceptable for demo)
+- [ ] Multi-photo detection: items share same category icon (no bounding boxes — acceptable)
+- [ ] Profile fields not editable after onboarding (fix in Sprint task 3)
