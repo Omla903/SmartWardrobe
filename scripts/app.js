@@ -16,6 +16,11 @@ const ONBOARDING_STEPS = [
     type: "info",
   },
   {
+    title: "Here's how it works",
+    sub: "Three things you can do right away.",
+    type: "howto",
+  },
+  {
     title: "First, what's your name?",
     sub: "We'll use it to personalise your experience.",
     type: "text",
@@ -124,7 +129,35 @@ function _renderOnboardingStep() {
   el.innerHTML = `
     <h2 class="step-title">${step.title}</h2>
     <p class="step-sub">${step.sub}</p>
-    ${step.type === "single" || step.type === "multi" ? `
+    ${step.type === "howto" ? `
+      <div class="how-to-steps">
+        <div class="how-to-step">
+          <div class="how-to-num">1</div>
+          <div class="how-to-step-text">
+            <strong>Add your clothes</strong>
+            <span>Tap the + button, take a photo or upload one. The AI will detect the item and fill in the details automatically.</span>
+          </div>
+        </div>
+        <div class="how-to-step">
+          <div class="how-to-num">2</div>
+          <div class="how-to-step-text">
+            <strong>Get outfit ideas</strong>
+            <span>Go to Outfits, pick an item you want to wear, and the app will build a complete look based on your wardrobe and the weather.</span>
+          </div>
+        </div>
+        <div class="how-to-step">
+          <div class="how-to-num">3</div>
+          <div class="how-to-step-text">
+            <strong>Ask for advice</strong>
+            <span>Use the AI chat to get outfit suggestions, check if a purchase makes sense, or plan what to pack for a trip.</span>
+          </div>
+        </div>
+      </div>
+      <div style="background:#ffffff;border-radius:12px;padding:16px;margin-top:12px">
+        <div style="font-size:13px;font-weight:700;color:#1a1a1a;margin-bottom:8px">Photo tips</div>
+        <p style="font-size:13px;color:#555;margin:0">For best results, place items flat on a plain surface or hang them against a plain wall. Good lighting makes the AI more accurate.</p>
+      </div>
+    ` : step.type === "single" || step.type === "multi" ? `
       <div class="step-options">
         ${step.options.map(o => {
           const current = styleProfile[step.key];
@@ -234,10 +267,6 @@ function _showApp() {
   _updateAvatarBtn();
   navigateTo("dashboard");
 
-  // Show how-to modal on first launch after onboarding
-  if (!localStorage.getItem("sw_seen_howto")) {
-    setTimeout(_showHowToModal, 800);
-  }
 }
 
 function _updateAvatarBtn() {
