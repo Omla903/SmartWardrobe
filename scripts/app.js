@@ -1058,10 +1058,15 @@ function _showHowToModal() {
   `;
   modal.innerHTML = `
     <div style="
+<<<<<<< HEAD
       background:var(--clr-surface);
       border-radius:var(--radius-xl) var(--radius-xl) 0 0;
       width:100%;max-width:480px;
       padding:var(--sp-6) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom));
+=======
+      background:var(--clr-surface);border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+      width:100%;max-width:480px;padding:var(--sp-6) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom));
+>>>>>>> 2eae522c473b1d4ba528a114786f25cf84a089e5
       max-height:90vh;overflow-y:auto;
     ">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-5)">
