@@ -1041,7 +1041,7 @@ function _showHowToModal() {
   `;
   modal.innerHTML = `
     <div style="
-      background:#F2EFEC;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+      background:var(--clr-surface);border-radius:var(--radius-xl) var(--radius-xl) 0 0;
       width:100%;max-width:480px;padding:var(--sp-6) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom));
       max-height:90vh;overflow-y:auto;
       position:relative;z-index:1000;
