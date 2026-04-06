@@ -1397,7 +1397,7 @@ input, textarea {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--clr-primary);
+  background: #9d9d60;
   color: #fff;
   font-weight: 800;
   font-size: var(--text-sm);
@@ -1415,16 +1415,17 @@ input, textarea {
   font-size: var(--text-sm);
   font-weight: 700;
   margin-bottom: 2px;
+  color: #2B2927;
 }
 .how-to-step-text span {
   font-size: var(--text-sm);
-  color: var(--clr-text-2);
+  color: #544F4B;
   line-height: 1.5;
 }
 
 .how-to-tip {
   font-size: var(--text-sm);
-  color: var(--clr-text-2);
+  color: #544F4B;
   line-height: 1.5;
 }
 
