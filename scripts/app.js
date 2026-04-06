@@ -1029,6 +1029,65 @@ function _sustainDesc(score, total) {
   return `Only ${score}% of your ${total} items worn in the last 30 days. Consider rewearing more before buying new.`;
 }
 
+// ── How-to-use modal ───────────────────────────────
+function _showHowToModal() {
+  if (document.getElementById("howToModal")) return;
+  const modal = document.createElement("div");
+  modal.id = "howToModal";
+  modal.style.cssText = `
+    position:fixed;inset:0;z-index:9999;
+    background:rgba(0,0,0,0.75);
+    display:flex;align-items:flex-end;justify-content:center;
+  `;
+  modal.innerHTML = `
+    <div style="
+      background:#ffffff;border-radius:var(--radius-xl) var(--radius-xl) 0 0;
+      width:100%;max-width:480px;padding:var(--sp-6) var(--sp-5) calc(var(--sp-6) + env(safe-area-inset-bottom));
+      max-height:90vh;overflow-y:auto;
+    ">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:var(--sp-5)">
+        <span style="font-size:var(--text-lg);font-weight:800;color:#2B2927">How to use Garde</span>
+        <button id="howToCloseBtn" style="background:none;border:none;color:#7E7B78;font-size:20px;cursor:pointer;padding:var(--sp-1)">✕</button>
+      </div>
+      <div style="background:#F2EFEC;border-radius:12px;padding:16px;margin-bottom:12px">
+        <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="background:#9d9d60;color:#fff;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">1</div>
+            <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:4px">Add your clothes</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Tap the + button, take a photo or upload one. The AI will detect the item and fill in the details automatically.</div></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="background:#9d9d60;color:#fff;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">2</div>
+            <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:4px">Get outfit ideas</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Go to Looks, pick an item you want to wear, and the app will build a complete look based on your wardrobe and the weather.</div></div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start">
+            <div style="background:#9d9d60;color:#fff;border-radius:50%;width:28px;height:28px;min-width:28px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px">3</div>
+            <div><div style="font-weight:700;font-size:14px;color:#2B2927;margin-bottom:4px">Ask for advice</div><div style="font-size:13px;color:#544F4B;line-height:1.5">Use the AI chat to get outfit suggestions, check if a purchase makes sense, or plan what to pack for a trip.</div></div>
+          </div>
+        </div>
+      </div>
+      <div style="background:#F2EFEC;border-radius:12px;padding:16px;margin-bottom:4px">
+        <div style="font-size:14px;font-weight:700;color:#2B2927;margin-bottom:6px">📸 Photo tips</div>
+        <div style="font-size:13px;color:#544F4B;line-height:1.5">For best results, place items flat on a plain surface or hang them against a plain wall. Good lighting makes the AI more accurate.</div>
+      </div>
+      <button id="howToGotItBtn" style="
+        width:100%;margin-top:20px;padding:14px;
+        background:#9d9d60;color:#fff;border:none;
+        border-radius:999px;font-size:16px;font-weight:700;cursor:pointer;
+      ">Got it</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+  modal.addEventListener("click", (e) => { if (e.target === modal) _closeHowToModal(); });
+  document.getElementById("howToCloseBtn").addEventListener("click", _closeHowToModal);
+  document.getElementById("howToGotItBtn").addEventListener("click", _closeHowToModal);
+}
+
+function _closeHowToModal() {
+  const modal = document.getElementById("howToModal");
+  if (modal) modal.remove();
+  localStorage.setItem("sw_seen_howto", "1");
+}
+
 // ══════════════════════════════════════════════════
 //  ADD ITEM MODAL — supports multi-item detection
 // ══════════════════════════════════════════════════
