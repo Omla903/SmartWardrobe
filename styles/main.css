@@ -2261,6 +2261,7 @@ img.lazy.loaded { opacity: 1; }
   box-shadow: 0 0 0 3px rgba(251,89,89,0.2);
 }
 
+<<<<<<< HEAD
 /* ── How-to modal overlay fix ─────────────────────── */
 #howToModal {
   position: fixed !important;
@@ -2281,4 +2282,26 @@ img.lazy.loaded { opacity: 1; }
   max-width: 480px !important;
   max-height: 90vh !important;
   overflow-y: auto !important;
+=======
+/* FIX HOW TO READABILITY */
+.how-to-step-text {
+  background: var(--clr-surface);
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+}
+
+.how-to-tip {
+  background: var(--clr-surface);
+  padding: var(--sp-3);
+  border-radius: var(--radius-md);
+  margin-top: var(--sp-3);
+}
+
+.how-to-step-text strong {
+  color: var(--clr-text);
+}
+
+.how-to-step-text span {
+  color: var(--clr-text-2);
+>>>>>>> af16862c56b0623d8edd7310dbe27602d68a128a
 }
