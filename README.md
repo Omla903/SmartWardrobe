@@ -61,7 +61,7 @@ Garde integrates multiple components into a single flow:
 
 ## Live demo
 
-https://smart-wardrobe-i7rzqw2t2-omla903s-projects.vercel.app
+https://smart-wardrobe-xi.vercel.app/
 
 ---
 
